@@ -4,5 +4,5 @@ package com.prndapplication.task.Search.Data;
  * Created by kiyoungLee on 2018-01-02.
  */
 
-public class SearchRepositoryImpl {
+public class SearchRepositoryImpl implements SearchRepsitory {
 }
