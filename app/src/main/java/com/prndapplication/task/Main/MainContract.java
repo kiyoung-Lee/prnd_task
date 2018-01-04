@@ -1,5 +1,6 @@
 package com.prndapplication.task.Main;
 
+import com.prndapplication.task.Common.BaseAdapter;
 import com.prndapplication.task.Common.BasePresenter;
 import com.prndapplication.task.Common.BaseView;
 
@@ -9,10 +10,17 @@ import com.prndapplication.task.Common.BaseView;
 
 public interface MainContract {
 
-    interface ActivityView extends BaseView<Presenter> {
+    interface ActivityView  {
+
+        void showEmptyList();
     }
 
     interface Presenter extends BasePresenter {
 
+        void setActivityView(MainContract.ActivityView activityView);
+
+        void setAdapterModel(BaseAdapter.Model adapterModel);
+
+        void setAdapterView(BaseAdapter.View adapterView);
     }
 }

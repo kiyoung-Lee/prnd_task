@@ -10,9 +10,8 @@ public interface BaseAdapter {
         void replaceData(T data);
     }
 
-    interface View extends BaseView<BasePresenter> {
-        @Override
-        void setPresenter(BasePresenter presenter);
+    interface View<T> {
+        void setPresenter(T presenter);
 
         void notifyAdapter();
     }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/border_rect_line_color"
+    android:layout_margin="5dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_margin="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="55dp"
+            android:layout_height="20dp"
+            android:background="@color/lightskyblue"
+            android:id="@+id/sale_status_layout"
+            android:layout_alignParentTop="true"
+            >
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="20dp"
+                android:id="@+id/sale_status"
+                android:text="판매중"
+                android:gravity="center"
+                android:textColor="@color/white_00"
+                android:layout_alignParentTop="true"
+                />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/car_image"
+            android:scaleType="centerCrop"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="차량이름"
+        android:id="@+id/car_name"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black_00"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="모델"
+        android:id="@+id/car_grade"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black_00"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/car_year"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="연식"
+        />
+
+</LinearLayout>
