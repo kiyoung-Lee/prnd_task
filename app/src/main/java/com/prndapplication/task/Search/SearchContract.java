@@ -1,5 +1,6 @@
 package com.prndapplication.task.Search;
 
+import com.prndapplication.task.Common.BaseAdapter;
 import com.prndapplication.task.Common.BasePresenter;
 import com.prndapplication.task.Common.BaseView;
 
@@ -9,10 +10,15 @@ import com.prndapplication.task.Common.BaseView;
 
 public interface SearchContract {
 
-    interface ActivityView extends BaseView<Presenter> {
+    interface ActivityView {
     }
 
     interface Presenter extends BasePresenter {
 
+        void setActivityView(SearchContract.ActivityView activityView);
+
+        void setAdapterModel(BaseAdapter.Model adapterModel);
+
+        void setAdapterView(BaseAdapter.View adapterView);
     }
 }

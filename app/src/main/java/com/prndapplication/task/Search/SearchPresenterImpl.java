@@ -1,5 +1,6 @@
 package com.prndapplication.task.Search;
 
+import com.prndapplication.task.Common.BaseAdapter;
 import com.prndapplication.task.Search.Data.SearchRepsitory;
 
 /**
@@ -10,6 +11,8 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
 
     private SearchRepsitory repsitory;
     private SearchContract.ActivityView activityView;
+    private BaseAdapter.Model adapterModel;
+    private BaseAdapter.View adapterView;
 
     public SearchPresenterImpl(SearchRepsitory repsitory) {
         this.repsitory = repsitory;
@@ -17,6 +20,14 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
 
     public void setActivityView(SearchContract.ActivityView activityView) {
         this.activityView = activityView;
+    }
+
+    public void setAdapterModel(BaseAdapter.Model adapterModel) {
+        this.adapterModel = adapterModel;
+    }
+
+    public void setAdapterView(BaseAdapter.View adapterView) {
+        this.adapterView = adapterView;
     }
 
     @Override

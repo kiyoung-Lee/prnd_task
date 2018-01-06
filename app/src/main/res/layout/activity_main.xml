@@ -9,12 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        android:background="@color/lightskyblue"
+        android:background="@color/cornflowerblue"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/search_layout"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="10dp"
@@ -23,10 +24,20 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="차종검색"
                 android:layout_marginLeft="10dp"
-                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/black_rank"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_search_black_24dp"
+                android:layout_gravity="center"
                 />
 
         </LinearLayout>

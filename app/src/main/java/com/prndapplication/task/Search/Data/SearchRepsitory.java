@@ -5,4 +5,22 @@ package com.prndapplication.task.Search.Data;
  */
 
 public interface SearchRepsitory {
+
+    interface BrandListCallBack{
+
+    }
+
+    interface CarListCallBack{
+
+    }
+
+    interface ModelListCallBack{
+
+    }
+
+    void getBrandList(BrandListCallBack callBack);
+
+    void getCarList(int brandId, CarListCallBack callBack);
+
+    void getModelList(int modelGroupId, ModelListCallBack callBack);
 }
