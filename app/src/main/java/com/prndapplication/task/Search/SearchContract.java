@@ -13,6 +13,10 @@ public interface SearchContract {
         void selectCarModel(String name, int id);
 
         void setTitle(String title);
+
+        void showEmptyList();
+
+        void showSearchList();
     }
 
     interface Presenter extends BasePresenter {

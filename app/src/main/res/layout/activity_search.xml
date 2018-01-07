@@ -16,4 +16,6 @@
         android:layout_margin="10dp"
         />
 
+    <include layout="@layout/noitem_view"/>
+
 </LinearLayout>

@@ -55,19 +55,28 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
     @Override
     public void start() {
         currentType = SearchType.BRAND;
+        getBrandList();
+    }
+
+    private void getBrandList(){
         repsitory.getBrandList(new SearchRepsitory.BrandListCallBack() {
             @Override
             public void brandListLoaded(List<BrandData> brandList) {
-                interactor.generateBrandListViewModel(brandList);
-                setBrandList();
-                setTitle("브랜드 선택");
+                brandListLoadedSuccess(brandList);
             }
 
             @Override
             public void dataNotAvailable() {
-
+                activityView.showEmptyList();
             }
         });
+    }
+
+    private void brandListLoadedSuccess(List<BrandData> brandList){
+        activityView.showSearchList();
+        interactor.generateBrandListViewModel(brandList);
+        setBrandList();
+        setTitle("브랜드 선택");
     }
 
     @Override
@@ -82,39 +91,56 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
     @Override
     public void clickSearchResult(String name, int id) {
         if(currentType == SearchType.BRAND){
-            repsitory.getCarList(id, new SearchRepsitory.CarListCallBack() {
-                @RequiresApi(api = Build.VERSION_CODES.N)
-                @Override
-                public void carListLoaded(CarData carData) {
-                    interactor.generateCarListViewModel(carData);
-                    setCarList();
-                    currentType = SearchType.CAR;
-                    setTitle("차종 선택");
-                }
-
-                @Override
-                public void dataNotAvailable() {
-
-                }
-            });
+            getCarList(id);
         }else if (currentType == SearchType.CAR){
-            repsitory.getModelList(id, new SearchRepsitory.ModelListCallBack() {
-                @Override
-                public void modelListLoaded(ModelData modelData) {
-                    List<SearchViewModel> modelList = interactor.generateModelListViewModel(modelData);
-                    changeAdapterList(modelList);
-                    currentType = SearchType.MODEL;
-                    setTitle("모델 선택");
-                }
-
-                @Override
-                public void dataNotAvailable() {
-
-                }
-            });
+            getModelList(id);
         }else if (currentType == SearchType.MODEL){
             activityView.selectCarModel(name, id);
         }
+    }
+
+    private void getCarList(int id){
+        repsitory.getCarList(id, new SearchRepsitory.CarListCallBack() {
+            @Override
+            public void carListLoaded(CarData carData) {
+                carListLoadSuccess(carData);
+            }
+
+            @Override
+            public void dataNotAvailable() {
+                activityView.showEmptyList();
+            }
+        });
+    }
+
+    private void carListLoadSuccess(CarData carData){
+        activityView.showSearchList();
+        interactor.generateCarListViewModel(carData);
+        setCarList();
+        currentType = SearchType.CAR;
+        setTitle("차종 선택");
+    }
+
+    private void getModelList(int id){
+        repsitory.getModelList(id, new SearchRepsitory.ModelListCallBack() {
+            @Override
+            public void modelListLoaded(ModelData modelData) {
+                modelListLoadSuccess(modelData);
+            }
+
+            @Override
+            public void dataNotAvailable() {
+                activityView.showEmptyList();
+            }
+        });
+    }
+
+    private void modelListLoadSuccess(ModelData modelData){
+        activityView.showSearchList();
+        List<SearchViewModel> modelList = interactor.generateModelListViewModel(modelData);
+        changeAdapterList(modelList);
+        currentType = SearchType.MODEL;
+        setTitle("모델 선택");
     }
 
     private void setBrandList(){

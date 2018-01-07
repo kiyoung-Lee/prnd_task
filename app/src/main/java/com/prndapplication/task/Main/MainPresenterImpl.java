@@ -86,8 +86,12 @@ public class MainPresenterImpl implements MainContract.Presenter{
 
     private void changeAdapterList(List<CarInfo> body){
         cachedCarList.addAll(body);
-        adapterModel.replaceData(cachedCarList);
-        adapterView.notifyAdapter();
+        if(cachedCarList.size() != 0) {
+            adapterModel.replaceData(cachedCarList);
+            adapterView.notifyAdapter();
+        }else{
+            activityView.showEmptyList();
+        }
     }
 
     @Override

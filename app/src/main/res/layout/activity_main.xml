@@ -60,4 +60,6 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <include layout="@layout/noitem_view"/>
+
 </LinearLayout>

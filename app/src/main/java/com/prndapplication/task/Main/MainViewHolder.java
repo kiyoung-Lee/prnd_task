@@ -91,7 +91,13 @@ public class MainViewHolder extends BaseRecyclerViewHolder<CarInfo, MainContract
         builder.append(" · ");
         builder.append(getFormattedDistance(data.getMileage()));
         builder.append(" · ");
-        builder.append(getFormattedPrice(data.getPrice()));
+
+        if(data.getDiscounted_price() != 0){
+            builder.append(getFormattedPrice(data.getDiscounted_price()));
+        }else {
+            builder.append(getFormattedPrice(data.getPrice()));
+        }
+
         return builder.toString();
     }
 }

@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.prndapplication.R;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.Acti
     SwipeRefreshLayout swipeContainer;
     @BindView(R.id.search_name)
     TextView searchName;
+    @BindView(R.id.noItem_view)
+    LinearLayout noItemView;
 
     private MainContract.Presenter presenter;
     private MainAdapter adapter;
@@ -58,17 +62,33 @@ public class MainActivity extends AppCompatActivity implements MainContract.Acti
 
     private void initView(){
         swipeContainer.setOnRefreshListener(() -> {
-            presenter.start(1);
             swipeContainer.setRefreshing(false);
-            lastScrolPos = 0;
-            searchModelId = 0;
-            setSearchName("차종검색");
+            resetMainVIew();
         });
     }
 
     @Override
     public void showEmptyList() {
+        swipeContainer.setVisibility(View.GONE);
+        noItemView.setVisibility(View.VISIBLE);
+    }
 
+    @OnClick(R.id.btn_refresh)
+    public void clickRefresh(){
+        showCarList();
+        resetMainVIew();
+    }
+
+    private void showCarList(){
+        swipeContainer.setVisibility(View.VISIBLE);
+        noItemView.setVisibility(View.GONE);
+    }
+
+    private void resetMainVIew(){
+        presenter.start(1);
+        lastScrolPos = 0;
+        searchModelId = 0;
+        setSearchName("차종검색");
     }
 
     RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener(){
@@ -109,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Acti
 
                 String searchName = data.getStringExtra("searchName");
                 setSearchName(searchName);
+                showCarList();
                 searchModelId = data.getIntExtra("searchResult", 0);
                 presenter.showSearchCarList(1, searchModelId);
             }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.prndapplication.R;
@@ -21,6 +23,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     TextView title;
     @BindView(R.id.search_list)
     RecyclerView searchList;
+    @BindView(R.id.noItem_view)
+    LinearLayout noItemView;
 
     private SearchContract.Presenter presenter;
     private SearchAdapter adapter;
@@ -30,7 +34,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
-
 
         presenter = new SearchPresenterImpl(new SearchRepositoryImpl());
         adapter = new SearchAdapter();
@@ -53,6 +56,23 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         }else{
             presenter.clickBackButton();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        clickBackButton();
+    }
+
+    @Override
+    public void showEmptyList() {
+        searchList.setVisibility(View.GONE);
+        noItemView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showSearchList() {
+        searchList.setVisibility(View.VISIBLE);
+        noItemView.setVisibility(View.GONE);
     }
 
     @Override

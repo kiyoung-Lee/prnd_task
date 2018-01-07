@@ -44,7 +44,6 @@ public class SearchInteractor {
                                 .collect(toList());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void generateCarListViewModel(CarData carData){
         carViewModelList = stream(carData.getModel_groups())
                                 .map(car -> {

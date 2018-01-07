@@ -94,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="차량번호"
                 android:layout_weight="1"
+                android:textColor="@color/black_rank"
                 />
 
             <TextView
@@ -120,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:text="주행거리"
                 android:layout_weight="1"
+                android:textColor="@color/black_rank"
                 />
 
             <TextView
@@ -146,6 +148,7 @@
                 android:layout_height="wrap_content"
                 android:text="최초등록일"
                 android:layout_weight="1"
+                android:textColor="@color/black_rank"
                 />
 
             <TextView
@@ -172,6 +175,7 @@
                 android:layout_height="wrap_content"
                 android:text="형식년도"
                 android:layout_weight="1"
+                android:textColor="@color/black_rank"
                 />
 
             <TextView
@@ -198,6 +202,7 @@
                 android:layout_height="wrap_content"
                 android:text="연료"
                 android:layout_weight="1"
+                android:textColor="@color/black_rank"
                 />
 
             <TextView
