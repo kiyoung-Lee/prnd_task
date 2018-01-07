@@ -21,8 +21,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -38,6 +38,11 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.5.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.romandanylyk:pageindicatorview:0.2.0'
+
+    // Stream Library
+    def solidVersion = '2.0.3'
+    implementation "info.android15.solid:streams:$solidVersion"
+    implementation "info.android15.solid:collections:$solidVersion"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
     testImplementation 'junit:junit:4.12'

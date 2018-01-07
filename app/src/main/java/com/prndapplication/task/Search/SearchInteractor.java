@@ -11,6 +11,10 @@ import com.prndapplication.task.Search.Data.SearchViewModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static solid.collectors.ToList.toList;
+import static solid.stream.Stream.stream;
 
 /**
  * Created by KiyoungLee on 2018-01-07.
@@ -29,42 +33,37 @@ public class SearchInteractor {
         return carViewModelList;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void generateBrandListViewModel(List<BrandData> brandList){
-        brandViewModelList = brandList
-                                .stream()
+        brandViewModelList = stream(brandList)
                                 .map(brand -> {
                                     SearchViewModel brandModel = new SearchViewModel();
                                     brandModel.setId(brand.getId());
                                     brandModel.setName(brand.getName());
                                     return brandModel;
                                 })
-                                .collect(Collectors.toList());
+                                .collect(toList());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void generateCarListViewModel(CarData carData){
-        carViewModelList = carData.getModel_groups()
-                                .stream()
+        carViewModelList = stream(carData.getModel_groups())
                                 .map(car -> {
                                     SearchViewModel carModel = new SearchViewModel();
                                     carModel.setId(car.getId());
                                     carModel.setName(car.getName());
                                     return carModel;
                                 })
-                                .collect(Collectors.toList());
+                                .collect(toList());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public List<SearchViewModel> generateModelListViewModel(ModelData modelData){
-        return modelData.getModels()
-                        .stream()
+        return stream(modelData.getModels())
                         .map(model -> {
                             SearchViewModel viewModel = new SearchViewModel();
                             viewModel.setId(model.getId());
                             viewModel.setName(model.getName());
                             return viewModel;
                         })
-                        .collect(Collectors.toList());
+                        .collect(toList());
     }
 }

@@ -56,7 +56,6 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
     public void start() {
         currentType = SearchType.BRAND;
         repsitory.getBrandList(new SearchRepsitory.BrandListCallBack() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void brandListLoaded(List<BrandData> brandList) {
                 interactor.generateBrandListViewModel(brandList);
@@ -100,7 +99,6 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
             });
         }else if (currentType == SearchType.CAR){
             repsitory.getModelList(id, new SearchRepsitory.ModelListCallBack() {
-                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void modelListLoaded(ModelData modelData) {
                     List<SearchViewModel> modelList = interactor.generateModelListViewModel(modelData);
