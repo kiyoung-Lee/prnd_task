@@ -1,5 +1,6 @@
 package com.prndapplication.task.DetailPage;
 
+import com.prndapplication.task.DetailPage.Data.CarDetail;
 import com.prndapplication.task.DetailPage.Data.DetailRepository;
 
 /**
@@ -19,8 +20,17 @@ public class DetailPresenterImpl implements DetailPageContract.Presenter {
         this.activityView = activityView;
     }
 
-    @Override
-    public void start() {
+    public void start(int carId) {
+        repository.getCarDetailPage(carId, new DetailRepository.CarDetailCallBack() {
+            @Override
+            public void carDetailLoaded(CarDetail detail) {
+                activityView.showDetailPage(detail);
+            }
 
+            @Override
+            public void dataNotAvailable() {
+
+            }
+        });
     }
 }

@@ -47,8 +47,7 @@ public class MainPresenterImpl implements MainContract.Presenter{
         repository.getDefaultCarList(new MainRepository.DefaultCarListCallBack() {
             @Override
             public void defaultCarListLoaded(List<CarInfo> body) {
-                adapterModel.replaceData(body);
-                adapterView.notifyAdapter();
+                changeAdapterList(body);
             }
 
             @Override
@@ -56,5 +55,30 @@ public class MainPresenterImpl implements MainContract.Presenter{
                 activityView.showEmptyList();
             }
         });
+    }
+
+    @Override
+    public void showSearchCarList(int modelId) {
+        repository.getSearchCarList(modelId, new MainRepository.SearchCarListCallBack() {
+            @Override
+            public void searchCarListLoaded(List<CarInfo> body) {
+                changeAdapterList(body);
+            }
+
+            @Override
+            public void dataNotAvailable() {
+
+            }
+        });
+    }
+
+    protected void changeAdapterList(List<CarInfo> body){
+        adapterModel.replaceData(body);
+        adapterView.notifyAdapter();
+    }
+
+    @Override
+    public void clickCarItem(int carId) {
+        activityView.showCarDetailPage(carId);
     }
 }

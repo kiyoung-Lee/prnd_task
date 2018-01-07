@@ -10,6 +10,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by kiyoungLee on 2018-01-02.
@@ -50,6 +51,6 @@ interface IGetDefaultCarListData {
 }
 
 interface IGetSearchCarListData {
-    @GET("/cars/?model={model_id}")
-    Call<List<CarInfo>> getSearchCarList(@Path("model_id") int modelId);
+    @GET("/cars")
+    Call<List<CarInfo>> getSearchCarList(@Query("model") int modelId);
 }

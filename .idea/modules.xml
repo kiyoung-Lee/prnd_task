@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Private\Git\prnd_task\app\app.iml" filepath="C:\Private\Git\prnd_task\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/prnd_task.iml" filepath="$PROJECT_DIR$/prnd_task.iml" />
-      <module fileurl="file://C:\Private\Git\prnd_task\prnd_task.iml" filepath="C:\Private\Git\prnd_task\prnd_task.iml" />
     </modules>
   </component>
 </project>

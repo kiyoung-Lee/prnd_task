@@ -23,11 +23,15 @@ public class GetBrandListCallBack implements Callback<List<BrandData>> {
 
     @Override
     public void onResponse(Call<List<BrandData>> call, Response<List<BrandData>> response) {
-
+        if (response.isSuccessful()) {
+            callBack.brandListLoaded(response.body());
+        }else{
+            callBack.dataNotAvailable();
+        }
     }
 
     @Override
     public void onFailure(Call<List<BrandData>> call, Throwable t) {
-
+        callBack.dataNotAvailable();
     }
 }

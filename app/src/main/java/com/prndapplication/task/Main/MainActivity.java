@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.AbsListView;
 
 import com.prndapplication.R;
+import com.prndapplication.task.DetailPage.DetailPageActivity;
 import com.prndapplication.task.Main.Data.MainRepositoryImpl;
 import com.prndapplication.task.Search.SearchActivity;
 
@@ -52,5 +53,23 @@ public class MainActivity extends AppCompatActivity implements MainContract.Acti
     public void clickSearch(){
         Intent intent = new Intent(this, SearchActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE){
+            if(resultCode == RESULT_OK){
+                int modelId = data.getIntExtra("searchResult", 0);
+                presenter.showSearchCarList(modelId);
+            }
+        }
+    }
+
+    @Override
+    public void showCarDetailPage(int carId) {
+        Intent intent = new Intent(this, DetailPageActivity.class);
+        intent.putExtra("carId", carId);
+        startActivity(intent);
     }
 }

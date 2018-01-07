@@ -20,6 +20,8 @@ import butterknife.BindView;
 
 public class MainViewHolder extends BaseRecyclerViewHolder<CarInfo, MainContract.Presenter>{
 
+    @BindView(R.id.holder_layout)
+    LinearLayout holderLayout;
     @BindView(R.id.car_image)
     ImageView carImage;
     @BindView(R.id.car_name)
@@ -49,6 +51,12 @@ public class MainViewHolder extends BaseRecyclerViewHolder<CarInfo, MainContract
         carName.setText(data.getModel_part_name());
         carGrade.setText(data.getGrade_part_name());
         carYear.setText(getOptionInfo(data));
+
+        String[] splitUrl = data.getAbsolute_url().split("/");
+        int carId = Integer.valueOf(splitUrl[4]);
+        holderLayout.setOnClickListener(view -> {
+            presenter.clickCarItem(carId);
+        });
     }
 
     private String getOptionInfo(CarInfo data){

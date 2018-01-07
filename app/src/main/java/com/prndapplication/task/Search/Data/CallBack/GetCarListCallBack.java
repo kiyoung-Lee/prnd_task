@@ -13,7 +13,7 @@ import retrofit2.Response;
  * Created by KiyoungLee on 2018-01-07.
  */
 
-public class GetCarListCallBack implements Callback<List<CarData>> {
+public class GetCarListCallBack implements Callback<CarData> {
 
     private SearchRepsitory.CarListCallBack callBack;
 
@@ -22,12 +22,16 @@ public class GetCarListCallBack implements Callback<List<CarData>> {
     }
 
     @Override
-    public void onResponse(Call<List<CarData>> call, Response<List<CarData>> response) {
-
+    public void onResponse(Call<CarData> call, Response<CarData> response) {
+        if (response.isSuccessful()) {
+            callBack.carListLoaded(response.body());
+        }else{
+            callBack.dataNotAvailable();
+        }
     }
 
     @Override
-    public void onFailure(Call<List<CarData>> call, Throwable t) {
-
+    public void onFailure(Call<CarData> call, Throwable t) {
+        callBack.dataNotAvailable();
     }
 }

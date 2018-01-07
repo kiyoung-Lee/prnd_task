@@ -38,7 +38,7 @@ public class SearchRepositoryImpl implements SearchRepsitory {
         if(callBack != null) {
             RetrofitClient<IGetCarListData> client = new RetrofitClient<>();
             IGetCarListData loader = client.getClient(IGetCarListData.class, StringApplication.BASE_URL);
-            Call<List<CarData>> call = loader.getCarList(brandId);
+            Call<CarData> call = loader.getCarList(brandId);
 
             if (call != null) {
                 call.enqueue(new GetCarListCallBack(callBack));
@@ -51,7 +51,7 @@ public class SearchRepositoryImpl implements SearchRepsitory {
         if(callBack != null) {
             RetrofitClient<IGetModelListData> client = new RetrofitClient<>();
             IGetModelListData loader = client.getClient(IGetModelListData.class, StringApplication.BASE_URL);
-            Call<List<ModelData>> call = loader.getModelList(modelGroupId);
+            Call<ModelData> call = loader.getModelList(modelGroupId);
 
             if (call != null) {
                 call.enqueue(new GetModelListCallBack(callBack));
@@ -69,11 +69,11 @@ interface IGetBrandListData {
 // 차종 목록
 interface IGetCarListData {
     @GET("/car_meta/brand/{brand_id}")
-    Call<List<CarData>> getCarList(@Path("brand_id") int brandId);
+    Call<CarData> getCarList(@Path("brand_id") int brandId);
 }
 
 // 모델 목록
 interface IGetModelListData {
     @GET("/car_meta/model_group/{model_group_id}")
-    Call<List<ModelData>> getModelList(@Path("model_group_id") int modelGroupId);
+    Call<ModelData> getModelList(@Path("model_group_id") int modelGroupId);
 }

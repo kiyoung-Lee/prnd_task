@@ -11,6 +11,7 @@ import com.prndapplication.task.Common.BaseView;
 public interface SearchContract {
 
     interface ActivityView {
+        void selectCarModel(int id);
     }
 
     interface Presenter extends BasePresenter {
@@ -20,5 +21,11 @@ public interface SearchContract {
         void setAdapterModel(BaseAdapter.Model adapterModel);
 
         void setAdapterView(BaseAdapter.View adapterView);
+
+        SearchPresenterImpl.SearchType getCurrentType();
+
+        void clickSearchResult(int id);
+
+        void clickBackButton();
     }
 }

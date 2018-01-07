@@ -5,4 +5,12 @@ package com.prndapplication.task.DetailPage.Data;
  */
 
 public interface DetailRepository {
+
+    interface CarDetailCallBack{
+        void carDetailLoaded(CarDetail detail);
+
+        void dataNotAvailable();
+    }
+
+    void getCarDetailPage(int carId, CarDetailCallBack callBack);
 }
