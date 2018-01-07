@@ -6,6 +6,7 @@ import com.prndapplication.task.Common.BaseAdapter;
 import com.prndapplication.task.Main.Data.CarInfo;
 import com.prndapplication.task.Main.Data.MainRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.v4.util.Preconditions.checkNotNull;
@@ -20,9 +21,11 @@ public class MainPresenterImpl implements MainContract.Presenter{
     private MainContract.ActivityView activityView;
     private BaseAdapter.Model adapterModel;
     private BaseAdapter.View adapterView;
+    private List<CarInfo> cachedCarList;
 
     public MainPresenterImpl(MainRepository repository) {
         this.repository = repository;
+        cachedCarList = new ArrayList<>();
     }
 
     public void setActivityView(MainContract.ActivityView activityView) {
@@ -38,13 +41,13 @@ public class MainPresenterImpl implements MainContract.Presenter{
     }
 
     @SuppressLint("RestrictedApi")
-    @Override
-    public void start() {
+    public void start(int page) {
         checkNotNull(activityView, "ActivityView Is Null");
         checkNotNull(adapterModel, "Adapter Model Is Null");
         checkNotNull(adapterView, "AdapterView Is Null");
 
-        repository.getDefaultCarList(new MainRepository.DefaultCarListCallBack() {
+        clearFirstPage(page);
+        repository.getDefaultCarList(page, new MainRepository.DefaultCarListCallBack() {
             @Override
             public void defaultCarListLoaded(List<CarInfo> body) {
                 changeAdapterList(body);
@@ -52,14 +55,16 @@ public class MainPresenterImpl implements MainContract.Presenter{
 
             @Override
             public void dataNotAvailable() {
-                activityView.showEmptyList();
+                if(page == 1)
+                    activityView.showEmptyList();
             }
         });
     }
 
     @Override
-    public void showSearchCarList(int modelId) {
-        repository.getSearchCarList(modelId, new MainRepository.SearchCarListCallBack() {
+    public void showSearchCarList(int page, int modelId) {
+        clearFirstPage(page);
+        repository.getSearchCarList(page, modelId, new MainRepository.SearchCarListCallBack() {
             @Override
             public void searchCarListLoaded(List<CarInfo> body) {
                 changeAdapterList(body);
@@ -67,13 +72,21 @@ public class MainPresenterImpl implements MainContract.Presenter{
 
             @Override
             public void dataNotAvailable() {
-
+                if(page == 1)
+                    activityView.showEmptyList();
             }
         });
     }
 
-    protected void changeAdapterList(List<CarInfo> body){
-        adapterModel.replaceData(body);
+    private void clearFirstPage(int page){
+        if(page == 1){
+            cachedCarList.clear();
+        }
+    }
+
+    private void changeAdapterList(List<CarInfo> body){
+        cachedCarList.addAll(body);
+        adapterModel.replaceData(cachedCarList);
         adapterView.notifyAdapter();
     }
 

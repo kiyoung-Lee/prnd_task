@@ -18,8 +18,6 @@ import com.prndapplication.task.DetailPage.Data.DetailPageRepositoryImpl;
 import com.prndapplication.task.Util.Layout;
 import com.rd.PageIndicatorView;
 
-import java.util.concurrent.TimeoutException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -127,6 +125,9 @@ public class DetailPageActivity extends AppCompatActivity implements DetailPageC
             case "판매완료":
                 saleStatus.setTextColor(ContextCompat.getColor(this, R.color.transBlack));
                 buttonCall.setBackgroundColor(ContextCompat.getColor(this, R.color.transBlack));
+                originPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+                originPrice.setTextColor(ContextCompat.getColor(this, R.color.transBlack));
+                salePrice.setVisibility(View.INVISIBLE);
                 break;
         }
     }

@@ -17,7 +17,9 @@ public interface MainContract {
         void showCarDetailPage(int carId);
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter {
+
+        void start(int page);
 
         void setActivityView(MainContract.ActivityView activityView);
 
@@ -25,7 +27,7 @@ public interface MainContract {
 
         void setAdapterView(BaseAdapter.View adapterView);
 
-        void showSearchCarList(int modelId);
+        void showSearchCarList(int page, int modelId);
 
         void clickCarItem(int carId);
     }

@@ -20,7 +20,7 @@ public interface MainRepository {
         void dataNotAvailable();
     }
 
-    void getDefaultCarList(DefaultCarListCallBack callBack);
+    void getDefaultCarList(int page, DefaultCarListCallBack callBack);
 
-    void getSearchCarList(int modelId, SearchCarListCallBack callBack);
+    void getSearchCarList(int page, int modelId, SearchCarListCallBack callBack);
 }

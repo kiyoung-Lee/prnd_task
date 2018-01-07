@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="차종검색"
                 android:layout_marginLeft="10dp"
+                android:id="@+id/search_name"
                 android:layout_gravity="center"
                 android:textColor="@color/black_rank"
                 android:layout_weight="1"
@@ -44,11 +45,19 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/car_list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        />
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/car_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

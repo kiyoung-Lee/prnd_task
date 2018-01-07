@@ -1,8 +1,14 @@
 package com.prndapplication.task.Main;
 
+import static com.prndapplication.task.Util.Layout.getFormattedDistance;
+import static com.prndapplication.task.Util.Layout.getFormattedPrice;
+
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.media.VolumeProviderCompat;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.prndapplication.R;
 import com.prndapplication.task.Common.BaseRecyclerViewHolder;
 import com.prndapplication.task.Main.Data.CarInfo;
+import com.prndapplication.task.Util.Layout;
 
 import butterknife.BindView;
 
@@ -42,8 +49,8 @@ public class MainViewHolder extends BaseRecyclerViewHolder<CarInfo, MainContract
     @Override
     public void bind(CarInfo data) {
         super.bind(data);
+        setSaleStatus(data);
 
-        saleStatus.setText(data.getStatus_display());
         Glide
             .with(context)
             .load(data.getMain_image_url())
@@ -54,18 +61,37 @@ public class MainViewHolder extends BaseRecyclerViewHolder<CarInfo, MainContract
 
         String[] splitUrl = data.getAbsolute_url().split("/");
         int carId = Integer.valueOf(splitUrl[4]);
+
         holderLayout.setOnClickListener(view -> {
             presenter.clickCarItem(carId);
         });
     }
 
+    private void setSaleStatus(CarInfo data){
+        String saleStatusText = data.getStatus_display();
+        saleStatus.setText(saleStatusText);
+
+        switch (saleStatusText){
+            case "판매중":
+                saleStatusLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.cornflowerblue));
+                break;
+            case "세일중":
+                saleStatusLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.mediumseagreen));
+                break;
+
+            case "판매완료":
+                saleStatusLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.black_rank));
+                break;
+        }
+    }
+
     private String getOptionInfo(CarInfo data){
         StringBuilder builder = new StringBuilder();
         builder.append(data.getYear());
-        builder.append("·");
-        builder.append(data.getMileage());
-        builder.append("·");
-        builder.append(data.getPrice());
+        builder.append(" · ");
+        builder.append(getFormattedDistance(data.getMileage()));
+        builder.append(" · ");
+        builder.append(getFormattedPrice(data.getPrice()));
         return builder.toString();
     }
 }

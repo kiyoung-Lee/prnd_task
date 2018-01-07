@@ -2,7 +2,6 @@ package com.prndapplication.task.Search;
 
 import com.prndapplication.task.Common.BaseAdapter;
 import com.prndapplication.task.Common.BasePresenter;
-import com.prndapplication.task.Common.BaseView;
 
 /**
  * Created by kiyoungLee on 2018-01-02.
@@ -11,7 +10,9 @@ import com.prndapplication.task.Common.BaseView;
 public interface SearchContract {
 
     interface ActivityView {
-        void selectCarModel(int id);
+        void selectCarModel(String name, int id);
+
+        void setTitle(String title);
     }
 
     interface Presenter extends BasePresenter {
@@ -24,7 +25,7 @@ public interface SearchContract {
 
         SearchPresenterImpl.SearchType getCurrentType();
 
-        void clickSearchResult(int id);
+        void clickSearchResult(String name, int id);
 
         void clickBackButton();
     }

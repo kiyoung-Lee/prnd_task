@@ -61,6 +61,7 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
             public void brandListLoaded(List<BrandData> brandList) {
                 interactor.generateBrandListViewModel(brandList);
                 setBrandList();
+                setTitle("브랜드 선택");
             }
 
             @Override
@@ -80,7 +81,7 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
     }
 
     @Override
-    public void clickSearchResult(int id) {
+    public void clickSearchResult(String name, int id) {
         if(currentType == SearchType.BRAND){
             repsitory.getCarList(id, new SearchRepsitory.CarListCallBack() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -89,6 +90,7 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
                     interactor.generateCarListViewModel(carData);
                     setCarList();
                     currentType = SearchType.CAR;
+                    setTitle("차종 선택");
                 }
 
                 @Override
@@ -104,6 +106,7 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
                     List<SearchViewModel> modelList = interactor.generateModelListViewModel(modelData);
                     changeAdapterList(modelList);
                     currentType = SearchType.MODEL;
+                    setTitle("모델 선택");
                 }
 
                 @Override
@@ -112,24 +115,28 @@ public class SearchPresenterImpl implements SearchContract.Presenter {
                 }
             });
         }else if (currentType == SearchType.MODEL){
-            activityView.selectCarModel(id);
+            activityView.selectCarModel(name, id);
         }
     }
 
-    protected void setBrandList(){
+    private void setBrandList(){
         List<SearchViewModel> brandSearchModel = interactor.getBrandViewModelList();
         changeAdapterList(brandSearchModel);
         currentType = SearchType.BRAND;
     }
 
-    protected void setCarList(){
+    private void setCarList(){
         List<SearchViewModel> carSearchModel = interactor.getCarViewModelList();
         changeAdapterList(carSearchModel);
         currentType = SearchType.CAR;
     }
 
-    protected void changeAdapterList(List<SearchViewModel> carSearchModel){
+    private void changeAdapterList(List<SearchViewModel> carSearchModel){
         adapterModel.replaceData(carSearchModel);
         adapterView.notifyAdapter();
+    }
+
+    private void setTitle(String title){
+        activityView.setTitle(title);
     }
 }

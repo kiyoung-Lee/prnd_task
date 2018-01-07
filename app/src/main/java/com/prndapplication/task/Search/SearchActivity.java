@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.prndapplication.R;
 import com.prndapplication.task.Search.Data.SearchRepositoryImpl;
@@ -16,6 +17,8 @@ import butterknife.OnClick;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.ActivityView{
 
+    @BindView(R.id.title)
+    TextView title;
     @BindView(R.id.search_list)
     RecyclerView searchList;
 
@@ -27,6 +30,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
+
 
         presenter = new SearchPresenterImpl(new SearchRepositoryImpl());
         adapter = new SearchAdapter();
@@ -52,11 +56,16 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override
-    public void selectCarModel(int id) {
+    public void selectCarModel(String name, int id) {
         Intent returnIntent = new Intent();
+        returnIntent.putExtra("searchName", name);
         returnIntent.putExtra("searchResult", id);
         setResult(RESULT_OK, returnIntent);
         finish();
     }
 
+    @Override
+    public void setTitle(String titleMsg) {
+        title.setText(titleMsg);
+    }
 }

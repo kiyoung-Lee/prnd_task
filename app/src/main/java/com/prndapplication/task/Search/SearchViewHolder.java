@@ -31,9 +31,7 @@ public class SearchViewHolder extends BaseRecyclerViewHolder<SearchViewModel, Se
         super.bind(data);
         searchResult.setText(data.getName());
         searchHolder.setOnClickListener(view -> {
-            presenter.clickSearchResult(data.getId());
+            presenter.clickSearchResult(data.getName(), data.getId());
         });
     }
-
-
 }
